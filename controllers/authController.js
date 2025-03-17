@@ -1,5 +1,5 @@
 import UserModel from "../models/userModel.js";
-import { comparePassword, generateToken } from "../utils/authUtils.js";
+import { comparePassword, generateToken , hashPassword} from "../utils/authUtils.js";
 
 export const userLogin = async (req, res) => {
   try {
@@ -40,7 +40,8 @@ export const userLogin = async (req, res) => {
 
 export const userRegister = async (req, res) => {
     try {
-      const saveData = await UserModel.create({ ...req.body });
+      const password = await hashPassword(req.body.password);
+      const saveData = await UserModel.create({ ...req.body,password });
   
       const userObject = saveData.toObject();
       delete userObject.password;

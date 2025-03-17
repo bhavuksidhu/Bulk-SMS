@@ -1,8 +1,12 @@
 import { genSalt, hash, compare } from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
 const expiresIn = process.env.JWT_EXPIRE_TOKEN;
+console.log(SECRET_KEY,expiresIn)
 const hashPassword = async (password) => {
   try {
     const salt = await genSalt(11);
