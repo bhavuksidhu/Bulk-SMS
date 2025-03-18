@@ -37,8 +37,7 @@ const CSVReader = () => {
     e.preventDefault();
     console.log(data.length>=1)
     if(data.length>=1){
-      navigate("/template")
-      console.log(data)
+      navigate("/template", {state:{data}});
     }
   }
   return (

@@ -255,7 +255,7 @@ button:disabled {
 
 .form {
   width: 90vw;
-  /* max-width: var(--fixed-width); */
+  max-width: var(--fixed-width);
   background: var(--background-secondary-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-2);

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/authRoute.js";
+import mailDataRouter from "./routes/mailDataModel.js"
 import cors from "cors";
 
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/mail", mailDataRouter);
 app.get("/",(req,res)=>res.send("true"));
 
 mongoose
