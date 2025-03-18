@@ -20,6 +20,7 @@ const EmailTemplate = () => {
     var10: "{var10}",
   });
 
+  const [subject, setSubject] = useState("");
   const [emailContent, setEmailContent] = useState(
     `Hello <b>{name}</b>,<br/><br/>
     Welcome to <b>{company}</b> as a <b>{position}</b>. Your email is <b>{email}</b>, and your joining date is <b>{startDate}</b>.<br/><br/>
@@ -52,8 +53,13 @@ const EmailTemplate = () => {
     e.preventDefault(); // Prevent page reload
     console.log("User Data:", userData);
     console.log("Final Email Content:", renderEmail());
+    console.log("Final Email subject:", subject);
+    console.log(JSON.parse(localStorage.getItem("credential")))
   };
 
+  const handleSubjectChange = (e) => {
+    setSubject(e.target.value);
+  };
   return (
     <form className="form" style={{ maxWidth: "90vw" }} onSubmit={handleSubmit}>
       <h2>Customize Email Template</h2> <br />
@@ -84,7 +90,7 @@ const EmailTemplate = () => {
       />
       <Input
         labelText={"Start Date:"}
-        type="text"
+        type="date"
         value={userData.startDate}
         onChange={(e) =>
           setUserData({ ...userData, startDate: e.target.value })
@@ -102,7 +108,11 @@ const EmailTemplate = () => {
           }
         />
       ))}
-
+      <Input
+        type="text"
+        name="subject"
+        onChange={handleSubjectChange}
+      />
       <label>Email Content:</label> <br />
       <br />
       <textarea

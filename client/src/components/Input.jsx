@@ -1,4 +1,4 @@
-const Input = ({ type, name, labelText, defaultValue, onChange}) => {
+const Input = ({ type, name, labelText, defaultValue, onChange, required}) => {
   return (
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>
@@ -11,7 +11,7 @@ const Input = ({ type, name, labelText, defaultValue, onChange}) => {
         className='form-input'
         defaultValue={defaultValue || ''}
         onChange={onChange}
-        required
+        required={required || false}
       />
     </div>
   );
