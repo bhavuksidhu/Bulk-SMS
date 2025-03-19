@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Input from "../components/Input";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import ConfirmationDialog from "../components/DialogBox";
 
 const EmailTemplate = () => {
   const [userData, setUserData] = useState({
@@ -82,19 +83,33 @@ const EmailTemplate = () => {
     }
   }, [data, emailContent, subject]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Final Message Array:", finalMessageArray);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLoader, setIsLoader] = useState(false);
 
+  const confirmationData = {
+    title: "Send Bulk-Emails",
+    message: "Are you sure you want to send bulk emails?",
+  };
+
+  const handleSendEmail = async () => {
+    console.log("ipen");
+    setIsLoader(true);
     try {
       const res = await axios.post("/api/v1/mail/send-bulk-email", {
-        emailData:finalMessageArray,
+        emailData: finalMessageArray,
         senderEmail: JSON.parse(localStorage.getItem("credential")).email,
       });
-      console.log(res.data.msg);
+      setIsLoader(false);
+      setIsDialogOpen(false);
+      alert(res.data.msg);
     } catch (error) {
       console.error("Error sending emails:", error);
     }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Final Message Array:", finalMessageArray);
+    setIsDialogOpen(true);
   };
 
   const handleSubjectChange = (e) => {
@@ -105,6 +120,14 @@ const EmailTemplate = () => {
     <form className="form" style={{ maxWidth: "90vw" }} onSubmit={handleSubmit}>
       <h2>Customize Email Template</h2>
       <br />
+      <ConfirmationDialog
+        open={isDialogOpen}
+        close={isDialogOpen}
+        confirmationData={confirmationData}
+        isLoader={isLoader}
+        setIsDialogOpen={setIsDialogOpen}
+        handleSendEmail={handleSendEmail}
+      />
       <Input
         type="text"
         value={userData.name}

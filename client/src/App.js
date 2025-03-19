@@ -6,7 +6,8 @@ import RegistrationPage from "./pages/RegistrationPage";
 import TamplatePage from "./pages/TemplatePage";
 import CSVReaderPage from "./pages/CSVReaderPage";
 import AuthComponent from "./components/AuthComponent";
-import LogOut from "./components/LogOut";
+import LogOut from "./components/LogOut"; 
+
 const App = () => {
   const [local, setLocal] = useState(false)
   useEffect(()=>{

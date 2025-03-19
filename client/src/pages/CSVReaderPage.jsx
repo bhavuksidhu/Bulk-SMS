@@ -33,20 +33,27 @@ const CSVReaderPage = () => {
     });
   };
   const navigate = useNavigate();
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data.length>=1)
-    if(data.length>=1){
-      navigate("/template", {state:{data}});
+    console.log(data.length >= 1);
+    if (data.length >= 1) {
+      navigate("/template", { state: { data } });
     }
-  }
+  };
   return (
-    <form className="form">
-      <h2>Upload and Parse CSV File</h2> <br/>
-      <Input type="file" accept=".csv" onChange={handleFileChange} />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      <br/><h3>Parsed Data:</h3><br/>
+    <div>
+      <form className="form">
+        <h2>Upload and Parse CSV File</h2> <br />
+        <Input type="file" accept=".csv" onChange={handleFileChange} />
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <br /> <br />
+        <button onClick={handleSubmit} className="btn btn-block form-btn">
+          Next
+        </button>
+      </form>
+      <br />
+      <h3 style={{ textAlign: "center" }}>Parsed Data:</h3>
+      <br />
       {data.length > 0 ? (
         <table border="1" cellPadding="10">
           <thead>
@@ -67,11 +74,9 @@ const CSVReaderPage = () => {
           </tbody>
         </table>
       ) : (
-        <p>No data parsed yet.</p>
-      )} 
-      <br /> <br />
-      <button onClick={handleSubmit}  className="btn btn-block form-btn">Next</button>
-    </form>
+        <p style={{ textAlign: "center" }}>No data parsed yet.</p>
+      )}
+    </div>
   );
 };
 
