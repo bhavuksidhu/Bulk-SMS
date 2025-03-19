@@ -5,19 +5,27 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/authRoute.js";
 import mailDataRouter from "./routes/mailDataModel.js"
 import cors from "cors";
+import { fileURLToPath } from "url"; 
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5100;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename); 
+import path from "path"; 
 
 app.use(cookieParser());
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/mail", mailDataRouter);
 app.get("/",(req,res)=>res.send("true"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 mongoose
   .connect(process.env.DB_URL)
