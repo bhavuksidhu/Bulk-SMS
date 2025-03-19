@@ -25,7 +25,7 @@ const App = () => {
         />
         <Route
           path="/register"
-          element={<AuthComponent Component={RegistrationPage} />}
+          element={<RegistrationPage />}
         />
         <Route
           path="/template"
