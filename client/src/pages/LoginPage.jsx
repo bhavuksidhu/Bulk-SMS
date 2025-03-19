@@ -18,7 +18,7 @@ const LoginPage = () => {
       const res = await axios.post("/api/v1/auth/login", data);
       navigate("/file-upload");
       localStorage.setItem("credential", JSON.stringify(res.data.data));
-      console.log(res.data.data);
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
