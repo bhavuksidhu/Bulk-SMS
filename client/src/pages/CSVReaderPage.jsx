@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Papa from "papaparse";
 import { useNavigate } from "react-router-dom";
 
-const CSVReader = () => {
+const CSVReaderPage = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState("");
 
@@ -75,4 +75,4 @@ const CSVReader = () => {
   );
 };
 
-export default CSVReader;
+export default CSVReaderPage;
