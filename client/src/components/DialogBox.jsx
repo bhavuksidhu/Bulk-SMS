@@ -25,7 +25,7 @@ const ConfirmationDialog = ({
             <div>
               <button onClick={handleSendEmail} style={yesButtonStyle}>
                 Yes
-              </button>
+              </button> &nbsp;&nbsp;&nbsp;&nbsp;
               <button onClick={handleNo} style={noButtonStyle}>
                 No
               </button>

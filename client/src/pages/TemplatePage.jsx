@@ -5,24 +5,6 @@ import axios from "axios";
 import ConfirmationDialog from "../components/DialogBox";
 
 const EmailTemplate = () => {
-  const [userData, setUserData] = useState({
-    name: "{name}",
-    email: "{email}",
-    company: "{company}",
-    position: "{position}",
-    startDate: "{startDate}",
-    var1: "{var1}",
-    var2: "{var2}",
-    var3: "{var3}",
-    var4: "{var4}",
-    var5: "{var5}",
-    var6: "{var6}",
-    var7: "{var7}",
-    var8: "{var8}",
-    var9: "{var9}",
-    var10: "{var10}",
-  });
-
   const [subject, setSubject] = useState(
     "Welcome {name}, Join {company} as a {position} starting on {startDate}"
   );
@@ -92,7 +74,6 @@ const EmailTemplate = () => {
   };
 
   const handleSendEmail = async () => {
-    console.log("ipen");
     setIsLoader(true);
     try {
       const res = await axios.post("/api/v1/mail/send-bulk-email", {
@@ -128,49 +109,7 @@ const EmailTemplate = () => {
         setIsDialogOpen={setIsDialogOpen}
         handleSendEmail={handleSendEmail}
       />
-      <Input
-        type="text"
-        value={userData.name}
-        labelText={"Name:"}
-        onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-      />
-      <Input
-        type="email"
-        labelText={"Email:"}
-        value={userData.email}
-        onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-      />
-      <Input
-        type="text"
-        labelText={"Company:"}
-        value={userData.company}
-        onChange={(e) => setUserData({ ...userData, company: e.target.value })}
-      />
-      <Input
-        type="text"
-        labelText={"Position:"}
-        value={userData.position}
-        onChange={(e) => setUserData({ ...userData, position: e.target.value })}
-      />
-      <Input
-        labelText={"Start Date:"}
-        type="date"
-        value={userData.startDate}
-        onChange={(e) =>
-          setUserData({ ...userData, startDate: e.target.value })
-        }
-      />
-      {[...Array(10)].map((_, i) => (
-        <Input
-          key={i}
-          type="text"
-          labelText={`Var${i + 1}:`}
-          value={userData[`var${i + 1}`]}
-          onChange={(e) =>
-            setUserData({ ...userData, [`var${i + 1}`]: e.target.value })
-          }
-        />
-      ))}
+
       <Input
         type="text"
         name="subject"
